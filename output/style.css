@@ -1,0 +1,29 @@
+#posterPositionPickerContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+#posterPositionPickerContainer label,
+#posterPositionPickerContainer input,
+#posterPositionPickerContainer button {
+  margin-bottom: 10px;
+}
+
+/* Style for placeholder representing the poster */
+#posterPlaceholder {
+   width:100%;
+   height:300px; /* Arbitrary fixed height, can be adjusted as needed */
+   background-color:#ddd; /* Light grey placeholder color */
+   position:relative;
+   display:flex;
+   justify-content:center;
+   align-items:center;
+}
+
+/* Indicator showing where the concert's name will be positioned */
+#positionIndicator {
+   width:auto; 
+   padding:5px; 
+   background-color:red; /* Highly visible color */
+   
+}

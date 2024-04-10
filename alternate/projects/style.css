@@ -1,0 +1,29 @@
+/* Global styles */
+:root {
+    --primary-color: #ff007f; /* Bright pink for attention-grabbing elements */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+.poster-container {
+    position:relative;
+    background-image:url('concert-background.jpg');
+    color:white;
+}
+
+#concert-name {
+   position:absolute;
+   top : var(--name-position-y);
+   left : var(--name-position-x);
+   font-size :3rem; /* Large size for the concert's name to stand out */
+   color :var(--primary-color); /* Using a bright color from the root variables */
+}
+
+#concert-info{
+   position:absolute;
+   bottom :20px; 
+   right :20px; 
+}

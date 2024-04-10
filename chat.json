@@ -1,0 +1,24 @@
+{
+  "messages": [
+    {
+      "user": "Hi",
+      "assistant": "Hello! I'm the assistant. How can I help you today?"
+    },
+    {
+      "user": "Can you design a poster for me?",
+      "assistant": "Sure, I can help you with that. What kind of poster are you looking for?"
+    },
+    {
+      "user": "I need a poster for a music concert.",
+      "assistant": "Great! Can you provide me with some more details about the concert?"
+    },
+    {
+      "user": "It will be an open venue concert, with a capacity of 2500 people. The name of the concert is 'BeatDown'",
+      "assistant": "Thank you for the clarification. What is the date of the concert and what is the location?"
+    },
+    {
+      "user": "It will be happening in HSR Layout, Bengaluru. As for the date, it will be on the 23rd of October, 2024.",
+      "assistant": "I see. Thanks for the information. Next, please specify where you would like the concert's name to be positioned on the poster in x and y pixels."
+    }
+  ]
+}

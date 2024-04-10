@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Poster Position Picker</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <!-- Poster Position Picker Container -->
+    <div id="posterPositionPickerContainer">
+      <label for="xPositionInput">X Position (in pixels):</label>
+      <input type="number" id="xPositionInput" name="xposition">
+
+      <label for="yPositionInput">Y Position (in pixels):</label>
+      <input type="number" id="yPositionInput" name="yposition">
+
+      <button onclick="submitPositions()">Submit Positions</button>
+
+      <!-- Placeholder for visual representation -->
+      <!-- This would be replaced with an actual image in a real scenario -->
+      <div id='posterPlaceholder'>
+        Concert Name Here
+        <!-- The position indicator will move based on input values -->
+        <span id='positionIndicator'></span> 
+      </div>
+
+    </div>  
+  </body>
+</html>

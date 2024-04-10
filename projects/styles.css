@@ -1,0 +1,22 @@
+/* Basic styles for the color picker container */
+#color-picker-container {
+    margin: auto;
+    text-align: center;
+}
+
+/* Styles for the example chat interface element */
+#chat-example {
+    width: 300px;
+    height: 100px;
+    border-radius: 10px;
+    margin-top:20px; 
+}
+
+@media only screen and (max-width :768px) {
+   /* Responsive design adjustments for mobile devices */
+   #chat-example {
+       width:auto; 
+       padding-left :10px; 
+       padding-right :10px; 
+   }
+}
