@@ -1,33 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Schedule Meeting</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Scheduler</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js" defer></script>
 </head>
-
 <body>
-    <form id="meetingForm">
-        <!-- Contact Selector -->
-        <label for="contactSelector">Select Contacts:</label><br/>
-        <select id="contactSelector" multiple required>
-            <option value="">--Please choose an option--</option> 
-            <!-- Options will be populated dynamically using JS -->
-        </select><br/>
+    <form id="meetingSchedulerForm">
+        <!-- Time Slot Dropdown -->
+        <label for="timeSlot">Choose a time slot:</label>
+        <select id="timeSlot" name="timeSlot"></select>
 
-        <!-- Time Slot Selector -->
-        <label for="timeSlotSelector">Select Time Slot:</label><br/>
-        <select id="timeSlotSelector" required>
-            <!-- Options will be populated dynamically using JS -->
-            </select><br/>
+        <!-- Agenda Textarea -->
+        <label for="agenda">Meeting Agenda:</label>
+        <textarea id="agenda" name="agenda" rows="4" cols="50" placeholder="Enter the meeting agenda..."></textarea>
 
-         <!-- Agenda Input Field -->   
-         <label for='agenda'>Agenda:</label><br/>  
-         <input type='text' id='agenda' name='agenda'><br/>
+        <!-- Participants Multi-Select -->
+        <label for="participants">Select Participants:</label>
+        <select id="participants" name="participants" multiple></select>
 
-         <!-- Submit Button -->   
-         <button type='submit' onclick= 'scheduleMeeting()'>Schedule Meeting</button>  
-     </form> 
-<script src = "script.js"></script>    
+        <!-- Submit Button -->
+        <button type="button" id="submitBtn">Submit</button>
+    </form>
 </body>
-
 </html>

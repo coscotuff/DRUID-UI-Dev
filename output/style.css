@@ -1,37 +1,43 @@
 body {
-  font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
 }
 
-#meetingForm {
-  width: 300px;
-  margin: auto;
+#meetingSchedulerForm {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#meetingForm label,
-#meetingForm select,
-#meetingForm input,
-#meetingForm button {
-  display: block;
-  margin-bottom: 15px;
+#meetingSchedulerForm label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
-#contactSelector, #timeSlotSelector{
-   height :100px; 
-   width :250px; 
-} 
-
-input[type=text]{
-   padding :10px; 
-   border-radius :5px; 
-} 
-
-button[type=submit]{
-   background-color:#4CAF50; 
-   color :white; 
-   padding :10px 20px;
-   border-radius:5px;
+#meetingSchedulerForm select,
+#meetingSchedulerForm textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* So that width includes padding */
 }
 
-button[type=submit]:hover{
-    background-color:#45a049;
+#meetingSchedulerForm button {
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#meetingSchedulerForm button:hover {
+    background-color: #4cae4c;
 }

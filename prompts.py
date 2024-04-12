@@ -59,7 +59,7 @@ Component breakdown:
 - [ ] Component 1 (Name Input): This is a text input field component for name. --HTML-- Create an input field for the user's name. --CSS-- Style the input field with appropriate width, height, padding, border, and font properties. Use transitions to provide smooth interaction feedback. --JS-- Optionally, implement validation to ensure the name input is not empty and contains valid characters. <(Note how all the content of this component are on a single line.)>
 - [ ] Component 2 (Age Dropdown): This is a dropdown menu component for age. --HTML-- Construct a dropdown menu for the user's age. --CSS-- Customize the dropdown's appearance, including its width, height, padding, border, and font properties. Ensure it matches the overall design theme. --JS-- Optionally, use JavaScript to dynamically populate the dropdown options or handle user interactions. <(Note how all the content of this component are on a single line.)>
 ...
-- [ ] Component 6 (Submit Button): This is a submit button component. --HTML-- Add a submit button for the user to submit the form. --CSS-- Style the submit button to make it visually prominent and consistent with the form's design. Adjust properties such as padding, font size, color, background, and border, and use transitions for hover effects. --JS-- Attach event listeners to the submit button to handle form submission, validation, or AJAX data sending, ensuring seamless interaction and data processing. <(Note how all the content of this component are on a single line.)>
+- [ ] Component 6 (Submit Button): This is a submit button component. The submit button must ALWAYS only say "Submit" and nothing else, no matter the use-case. --HTML-- Add a submit button for the user to submit the form. --CSS-- Style the submit button to make it visually prominent and consistent with the form's design. Adjust properties such as padding, font size, color, background, and border, and use transitions for hover effects. --JS-- Attach event listeners to the submit button to handle form submission, validation, or AJAX data sending, ensuring seamless interaction and data processing. <(Note how all the content of this component are on a single line.)>
 ```
 
 Abide by User Interface Design Principles including Hierarchy Principle (size/color), CSS Design Principles (REM units/global styles/modularization), Font Pairing Principle (limit font types/use tools like Archetype), Spacing/Rhythm Principle (consistent spacing/rhythm), Colors/Contrast Principle (color theory/accessibility/tool usage), Responsiveness Principle (adapt designs per screen size/mobile-first/desktop-first approach) and Visual Communication with Icons Principle (use icon fonts/simplicity/familiarity).
@@ -163,8 +163,8 @@ Do not include '```' within markdown response sections other than delineating co
 You MUST ensure to follow the above format. Ensure all the code generated is proper without code breaking errors. Failure to do so will result in non-acceptance and severe penalties.
 
 ###Remember###
-1) If a user needs to select a date, create a date picker element.
-2) For data presentation like lists or tables, produce appropriate UI elements.
+1) If a user needs to select a date, create a date picker element. For data presentation like lists or tables, produce appropriate UI elements.
+2) The submit button must ALWAYS only say "Submit" and nothing else, no matter the use-case.
 3) You MUST ensure that every component is implemented. Do not miss any components from the breakdown plan provided in the project breakdown.
 4) You MUST ensure that the code generated is correct, complete, and consistent. Take addtional care to avoid syntax errors, naming errors, formatting errors and uncaught reference errors.
 5) Use your creativity and fill in the blanks when there is a lack of information instead of adding placeholders in the code.

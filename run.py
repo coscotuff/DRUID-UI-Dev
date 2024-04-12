@@ -15,8 +15,8 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def call_gpt(
     prompt=None,
-    temperature=0.3,
-    top_p=0.5,
+    temperature=0,
+    top_p=1,
     frequency_penalty=1,
     presence_penalty=1,
     max_tokens=1432,
@@ -31,7 +31,7 @@ def call_gpt(
     # console.log(f"# System Message: \n{system_message}\n")
     # console.log(f"# Prompt: \n{prompt}\n")
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4-1106-preview",
         messages=[
             {
                 "role": "system",
@@ -45,8 +45,8 @@ def call_gpt(
         temperature=temperature,
         max_tokens=max_tokens,
         top_p=top_p,
-        frequency_penalty=frequency_penalty,
-        presence_penalty=presence_penalty,
+        # frequency_penalty=frequency_penalty,
+        # presence_penalty=presence_penalty,
     )
 
     content = response.choices[0].message.content

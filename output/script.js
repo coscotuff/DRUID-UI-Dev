@@ -1,42 +1,51 @@
-// Contacts and Free Slots Data
-var contacts = ['Anmol', 'Sukrit', 'Rahul', 'Riya', 'Sakshi', 'Rohan'];
-var freeSlots = ['10-11 AM', '11-12 PM','12PM-1PM','2PM-3PM','3PM-4PM','4PM-5PM'];
+document.addEventListener('DOMContentLoaded', function() {
+    const timeSlots = ['10-11 AM', '11-12 PM', '12PM-1PM', '2PM-3PM', '3PM-4PM', '4PM-5PM'];
+    const participants = ['Anmol', 'Sukrit', 'Rahul', 'Riya', 'Sakshi', 'Rohan'];
+    const timeSlotSelect = document.getElementById('timeSlot');
+    const participantsSelect = document.getElementById('participants');
+    const submitBtn = document.getElementById('submitBtn');
+    const agendaTextarea = document.getElementById('agenda');
 
-// Populate Contact Selector Options
-contacts.forEach(function(contact) {
-    var option = document.createElement('option');
-    option.text = contact;
-    document.getElementById('contactSelector').add(option);
+    // Populate time slots dropdown
+    timeSlots.forEach(function(slot) {
+        const option = document.createElement('option');
+        option.value = slot;
+        option.textContent = slot;
+        timeSlotSelect.appendChild(option);
+    });
+
+    // Populate participants multi-select
+    participants.forEach(function(participant) {
+        const option = document.createElement('option');
+        option.value = participant;
+        option.textContent = participant;
+        participantsSelect.appendChild(option);
+    });
+
+    // Submit button event listener
+    submitBtn.addEventListener('click', function() {
+        const selectedTimeSlot = timeSlotSelect.value;
+        const selectedParticipants = Array.from(participantsSelect.selectedOptions).map(option => option.value);
+        const agenda = agendaTextarea.value.trim();
+
+        // Validate form data
+        if (!selectedTimeSlot) {
+            alert('Please select a time slot.');
+            return;
+        }
+        if (selectedParticipants.length === 0) {
+            alert('Please select at least one participant.');
+            return;
+        }
+        if (!agenda) {
+            alert('Please enter the meeting agenda.');
+            return;
+        }
+
+        // Handle form submission
+        console.log('Meeting Time Slot:', selectedTimeSlot);
+        console.log('Meeting Participants:', selectedParticipants);
+        console.log('Meeting Agenda:', agenda);
+        // Here you would typically send the data to a server or handle it as needed
+    });
 });
-
-// Populate Time Slot Selector Options
-freeSlots.forEach(function(slot) {
-    var option = document.createElement('option');
-    option.text = slot;
-    document.getElementById('timeSlotSelector').add(option);
-});
-
-function scheduleMeeting() {
-  event.preventDefault();
-  
-  // Get Selected Contacts, Time Slot and Agenda from Form Inputs
-  var selectedContactsNodeList=document.querySelectorAll('#contactSelector option:checked'); 
-  var selectedContactsArray= Array.from(selectedContactsNodeList); 
-
-  let selectedContacts=[];
-  
-  for(let i=0;i<selectedContactsArray.length;i++){
-      selectedContacts.push(selectedContactsArray[i].value)
-      }
-
-let timeSlot=document.querySelector('#timeSlotSelector').value;
-
-let agenda=document.querySelector('#agenda').value;
-
-console.log("Selected Contacts:",selectedContacts,"Time Slot:",timeSlot,"Agenda",agenda);
-
-alert("Meeting Scheduled Successfully!");
-
-document.getElementById("meetingForm").reset();
-
-}
