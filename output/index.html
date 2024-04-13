@@ -1,28 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meeting Scheduler</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Concert Poster</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <form id="meetingSchedulerForm">
-        <!-- Time Slot Dropdown -->
-        <label for="timeSlot">Choose a time slot:</label>
-        <select id="timeSlot" name="timeSlot"></select>
+  <form id="posterForm">
+    <!-- Component 1: Band Name Input -->
+    <div class="form-group">
+      <label for="bandName">Band Name:</label>
+      <input type="text" id="bandName" name="bandName" value="The Rockers" required>
+    </div>
 
-        <!-- Agenda Textarea -->
-        <label for="agenda">Meeting Agenda:</label>
-        <textarea id="agenda" name="agenda" rows="4" cols="50" placeholder="Enter the meeting agenda..."></textarea>
+    <!-- Component 2: Concert Date Picker -->
+    <div class="form-group">
+      <label for="concertDate">Concert Date:</label>
+      <input type="date" id="concertDate" name="concertDate" required>
+    </div>
 
-        <!-- Participants Multi-Select -->
-        <label for="participants">Select Participants:</label>
-        <select id="participants" name="participants" multiple></select>
+    <!-- Component 3: Image Upload Field -->
+    <div class="form-group">
+      <label for="imageUpload">Poster Image:</label>
+      <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
+      <div id="imagePreview"></div>
+    </div>
 
-        <!-- Submit Button -->
-        <button type="button" id="submitBtn">Submit</button>
-    </form>
+    <!-- Component 4: Text Area for Additional Text -->
+    <div class="form-group">
+      <label for="additionalText">Additional Text:</label>
+      <textarea id="additionalText" name="additionalText" rows="4"></textarea>
+    </div>
+
+    <!-- Component 5: Color Picker for Text -->
+    <div class="form-group">
+      <label for="textColor">Text Color:</label>
+      <input type="color" id="textColor" name="textColor">
+      <div id="colorPreview"></div>
+    </div>
+
+    <!-- Component 6: Submit Button -->
+    <div class="form-group">
+      <button type="submit" id="submitButton">Submit</button>
+    </div>
+  </form>
 </body>
 </html>

@@ -1,51 +1,52 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const timeSlots = ['10-11 AM', '11-12 PM', '12PM-1PM', '2PM-3PM', '3PM-4PM', '4PM-5PM'];
-    const participants = ['Anmol', 'Sukrit', 'Rahul', 'Riya', 'Sakshi', 'Rohan'];
-    const timeSlotSelect = document.getElementById('timeSlot');
-    const participantsSelect = document.getElementById('participants');
-    const submitBtn = document.getElementById('submitBtn');
-    const agendaTextarea = document.getElementById('agenda');
+  const bandNameInput = document.getElementById('bandName');
+  const concertDateInput = document.getElementById('concertDate');
+  const imageUploadInput = document.getElementById('imageUpload');
+  const imagePreview = document.getElementById('imagePreview');
+  const textColorInput = document.getElementById('textColor');
+  const colorPreview = document.getElementById('colorPreview');
+  const form = document.getElementById('posterForm');
 
-    // Populate time slots dropdown
-    timeSlots.forEach(function(slot) {
-        const option = document.createElement('option');
-        option.value = slot;
-        option.textContent = slot;
-        timeSlotSelect.appendChild(option);
-    });
+  // Prevent past dates from being selected
+  const today = new Date().toISOString().split('T')[0];
+  concertDateInput.setAttribute('min', today);
 
-    // Populate participants multi-select
-    participants.forEach(function(participant) {
-        const option = document.createElement('option');
-        option.value = participant;
-        option.textContent = participant;
-        participantsSelect.appendChild(option);
-    });
+  // Image upload preview
+  imageUploadInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        imagePreview.style.backgroundImage = `url(${e.target.result})`;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 
-    // Submit button event listener
-    submitBtn.addEventListener('click', function() {
-        const selectedTimeSlot = timeSlotSelect.value;
-        const selectedParticipants = Array.from(participantsSelect.selectedOptions).map(option => option.value);
-        const agenda = agendaTextarea.value.trim();
+  // Update color preview
+  textColorInput.addEventListener('input', function() {
+    colorPreview.style.backgroundColor = this.value;
+  });
 
-        // Validate form data
-        if (!selectedTimeSlot) {
-            alert('Please select a time slot.');
-            return;
-        }
-        if (selectedParticipants.length === 0) {
-            alert('Please select at least one participant.');
-            return;
-        }
-        if (!agenda) {
-            alert('Please enter the meeting agenda.');
-            return;
-        }
+  // Form submission
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    // Validate inputs
+    if (bandNameInput.value.trim() === '') {
+      alert('Please enter the band name.');
+      return;
+    }
+    if (!concertDateInput.value) {
+      alert('Please select a concert date.');
+      return;
+    }
+    // More validation can be added as needed
 
-        // Handle form submission
-        console.log('Meeting Time Slot:', selectedTimeSlot);
-        console.log('Meeting Participants:', selectedParticipants);
-        console.log('Meeting Agenda:', agenda);
-        // Here you would typically send the data to a server or handle it as needed
-    });
+    // Form submission logic here
+    console.log('Form submitted!');
+    // For demonstration purposes, we'll just clear the form
+    form.reset();
+    imagePreview.style.backgroundImage = '';
+    colorPreview.style.backgroundColor = '#ffffff';
+  });
 });

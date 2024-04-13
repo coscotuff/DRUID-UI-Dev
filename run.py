@@ -17,9 +17,8 @@ def call_gpt(
     prompt=None,
     temperature=0,
     top_p=1,
-    frequency_penalty=1,
-    presence_penalty=1,
-    max_tokens=1432,
+    experimental=False,
+    max_tokens=1500,
     system_message_path: Optional[str] = None,
 ):
     if system_message_path:
@@ -30,8 +29,13 @@ def call_gpt(
 
     # console.log(f"# System Message: \n{system_message}\n")
     # console.log(f"# Prompt: \n{prompt}\n")
+    if experimental:
+        model = "gpt-4-turbo-2024-04-09"
+    else:
+        model = "gpt-4-1106-preview"
+
     response = client.chat.completions.create(
-        model="gpt-4-1106-preview",
+        model=model,
         messages=[
             {
                 "role": "system",
@@ -45,8 +49,6 @@ def call_gpt(
         temperature=temperature,
         max_tokens=max_tokens,
         top_p=top_p,
-        # frequency_penalty=frequency_penalty,
-        # presence_penalty=presence_penalty,
     )
 
     content = response.choices[0].message.content
@@ -58,7 +60,7 @@ def get_breakdown(history):
         clarifying_question=history[-1], chat_history=history[:-1]
     )
     plan = call_gpt(prompt=prompt)
-    with open("plan.md", "w") as file:
+    with open("output/plan.md", "w") as file:
         file.write(plan)
     return plan
 
@@ -74,7 +76,7 @@ def get_code(component_wise_breakdown, messages, key_details):
     # print("component_wise_breakdown: ", component_wise_breakdown)
     code = call_gpt(prompt=prompt)
     # code = "N"
-    with open("code.md", "w") as file:
+    with open("output/code.md", "w") as file:
         file.write(code)
     return code
 
@@ -266,7 +268,7 @@ def run():
     console.log("[bold green]Code generated successfully!")
 
     # Save the response
-    with open("response.md", "w") as file:
+    with open("output/response.md", "w") as file:
         file.write(response)
     console.log("Response saved successfully!")
 

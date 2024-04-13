@@ -164,7 +164,7 @@ You MUST ensure to follow the above format. Ensure all the code generated is pro
 
 ###Remember###
 1) If a user needs to select a date, create a date picker element. For data presentation like lists or tables, produce appropriate UI elements.
-2) The submit button must ALWAYS only say "Submit" and nothing else, no matter the use-case.
+2) You MUST ensure that the submit button MUST say "Submit" and nothing else, no matter the use-case.
 3) You MUST ensure that every component is implemented. Do not miss any components from the breakdown plan provided in the project breakdown.
 4) You MUST ensure that the code generated is correct, complete, and consistent. Take addtional care to avoid syntax errors, naming errors, formatting errors and uncaught reference errors.
 5) Use your creativity and fill in the blanks when there is a lack of information instead of adding placeholders in the code.
