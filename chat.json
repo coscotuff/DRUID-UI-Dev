@@ -22,7 +22,7 @@
     },
     {
       "user": "Yes, I need you to schedule a meeting for me. Can you do that?",
-      "assistant": "Sure! I can do that. When would you like to schedule it, for how long will the meet be, what is the agenda, and who all would you like to invite to participate in the meeting? Strictly refer to the following data: {'contacts': ['Anmol', 'Sukrit', 'Rahul', 'Riya', 'Sakshi', 'Rohan'], 'free slots': ['10-11 AM', '11-12 PM', '12PM-1PM', '2PM-3PM', '3PM-4PM', '4PM-5PM']."
+      "assistant": "Sure! I can do that. When would you like to schedule it, for how long will the meet be, what is the agenda, and who all would you like to invite to participate in the meeting? Strictly refer to the following data: {'contacts': ['Anmol', 'Sukrit', 'Rahul', 'Riya', 'Sakshi', 'Rohan'], 'free slots': ['10AM-11AM', '11AM-12PM', '12PM-1PM', '2PM-3PM', '3PM-4PM', '4PM-5PM']."
     }
   ]
 }

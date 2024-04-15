@@ -6,12 +6,12 @@ import os
 import json
 
 from rich.console import Console
-from prompts import PLANNING_PROMPT_V2, CODING_PROMPT_V2
+from prompts import PLANNING_PROMPT_V2, CODING_PROMPT_V2, CODING_PROMPT_TAILWIND, PLANNING_PROMPT_TAILWIND
 
 load_dotenv()
 console = Console()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
+tailwind = True
 
 def call_gpt(
     prompt=None,
@@ -56,7 +56,7 @@ def call_gpt(
 
 
 def get_breakdown(history):
-    prompt = PLANNING_PROMPT_V2.format(
+    prompt = PLANNING_PROMPT_TAILWIND.format(
         clarifying_question=history[-1], chat_history=history[:-1]
     )
     plan = call_gpt(prompt=prompt)
@@ -66,16 +66,21 @@ def get_breakdown(history):
 
 
 def get_code(component_wise_breakdown, messages, key_details):
-    prompt = CODING_PROMPT_V2.format(
-        component_wise_breakdown=component_wise_breakdown,
-        clarifying_question=messages[-1],
-        # chat_history=messages[:-1],
-        key_details=key_details,
-    )
+    if tailwind:
+        prompt = CODING_PROMPT_TAILWIND.format(
+            component_wise_breakdown=component_wise_breakdown,
+            clarifying_question=messages[-1],
+            key_details=key_details,
+        )
+    else:
+        prompt = CODING_PROMPT_V2.format(
+            component_wise_breakdown=component_wise_breakdown,
+            clarifying_question=messages[-1],
+            key_details=key_details,
+        )
 
     # print("component_wise_breakdown: ", component_wise_breakdown)
     code = call_gpt(prompt=prompt)
-    # code = "N"
     with open("output/code.md", "w") as file:
         file.write(code)
     return code
@@ -163,7 +168,7 @@ def parse_response(response):
       ## **HTML**
       {html content here}
 
-      ## **CSS**
+      ## **CSS** (Optional in the case of Tailwind CSS)
       {css content here}
 
       ## **Javascript**
@@ -174,7 +179,7 @@ def parse_response(response):
     {
         "requirement": str,
         "html": str,
-        "css": str,
+        "css": str (optional),
         "js": str
     }
     Also make an output directory and save the html, css, and js files there.
@@ -202,7 +207,7 @@ def parse_response(response):
                 parsed_response["html"] = (
                     parsed_response["html"].split("```")[0].strip()
                 )
-        elif section.startswith("**CSS**"):
+        elif not tailwind and section.startswith("**CSS**"):
             parsed_response["css"] = section.split("**CSS**")[1].strip()
             if parsed_response["css"].startswith("```css"):
                 parsed_response["css"] = (
@@ -230,9 +235,10 @@ def parse_response(response):
             file.write(parsed_response["html"])
         console.log("HTML saved in output/index.html")
 
-        with open("output/style.css", "w") as file:
-            file.write(parsed_response["css"])
-        console.log("CSS saved in output/style.css")
+        if not tailwind:
+            with open("output/style.css", "w") as file:
+                file.write(parsed_response["css"])
+            console.log("CSS saved in output/style.css")
 
         with open("output/script.js", "w") as file:
             file.write(parsed_response["js"])

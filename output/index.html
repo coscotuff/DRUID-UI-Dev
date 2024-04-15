@@ -1,50 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rock Concert Poster</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Scheduler</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <form id="posterForm">
-    <!-- Component 1: Band Name Input -->
-    <div class="form-group">
-      <label for="bandName">Band Name:</label>
-      <input type="text" id="bandName" name="bandName" value="The Rockers" required>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow">
+        <h1 class="text-xl font-bold mb-4">Schedule a Meeting</h1>
+        <form id="meetingForm">
+            <!-- Component 1 (Meeting Time Dropdown) -->
+            <label for="meetingTime" class="block mb-2 text-sm font-medium text-gray-700">Meeting Time</label>
+            <select id="meetingTime" class="block w-full p-2 border border-gray-300 rounded-md mb-4">
+                <!-- Options will be populated by JS -->
+            </select>
+
+            <!-- Component 2 (Duration Input) -->
+            <label for="duration" class="block mb-2 text-sm font-medium text-gray-700">Duration</label>
+            <input type="text" id="duration" placeholder="e.g., 1 hour" class="block w-full p-2 border border-gray-300 rounded-md mb-4">
+
+            <!-- Component 3 (Agenda Textarea) -->
+            <label for="agenda" class="block mb-2 text-sm font-medium text-gray-700">Agenda</label>
+            <textarea id="agenda" rows="4" class="block w-full p-2 border border-gray-300 rounded-md mb-4 resize-y"></textarea>
+
+            <!-- Component 4 (Participants Multi-select) -->
+            <label for="participants" class="block mb-2 text-sm font-medium text-gray-700">Participants</label>
+            <select id="participants" multiple class="block w-full p-2 border border-gray-300 rounded-md mb-4">
+                <!-- Options will be populated by JS -->
+            </select>
+
+            <!-- Component 5 (Submit Button) -->
+            <button type="submit" class="w-full p-3 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 transition duration-300">
+                Submit
+            </button>
+        </form>
     </div>
 
-    <!-- Component 2: Concert Date Picker -->
-    <div class="form-group">
-      <label for="concertDate">Concert Date:</label>
-      <input type="date" id="concertDate" name="concertDate" required>
-    </div>
-
-    <!-- Component 3: Image Upload Field -->
-    <div class="form-group">
-      <label for="imageUpload">Poster Image:</label>
-      <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
-      <div id="imagePreview"></div>
-    </div>
-
-    <!-- Component 4: Text Area for Additional Text -->
-    <div class="form-group">
-      <label for="additionalText">Additional Text:</label>
-      <textarea id="additionalText" name="additionalText" rows="4"></textarea>
-    </div>
-
-    <!-- Component 5: Color Picker for Text -->
-    <div class="form-group">
-      <label for="textColor">Text Color:</label>
-      <input type="color" id="textColor" name="textColor">
-      <div id="colorPreview"></div>
-    </div>
-
-    <!-- Component 6: Submit Button -->
-    <div class="form-group">
-      <button type="submit" id="submitButton">Submit</button>
-    </div>
-  </form>
+    <script src="script.js"></script>
 </body>
 </html>
