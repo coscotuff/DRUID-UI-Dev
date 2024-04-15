@@ -21,8 +21,8 @@
       "assistant": "I see. Thanks for the information. I will notify you once this poster is ready. Is there anything else you need help with?"
     },
     {
-      "user": "Yes, I need you to schedule a meeting for me. Can you do that?",
-      "assistant": "Sure! I can do that. When would you like to schedule it, for how long will the meet be, what is the agenda, and who all would you like to invite to participate in the meeting? Strictly refer to the following data: {'contacts': ['Anmol', 'Sukrit', 'Rahul', 'Riya', 'Sakshi', 'Rohan'], 'free slots': ['10AM-11AM', '11AM-12PM', '12PM-1PM', '2PM-3PM', '3PM-4PM', '4PM-5PM']."
+      "user": "Yes, can you help me make a reservation at a restaurant in the HSR area?",
+      "assistant": "Sure, I can do that. Which of restaurant from HSR Layout would you be interested in? Strictly refer to the following data: {'Truffles': {'Image URL': 'https://content.jdmagicbox.com/v2/comp/bangalore/a4/080pxx80.xx80.170403121558.u8a4/catalogue/truffles-kalyan-nagar-bangalore-restaurants-vtskn.jpg', 'Truffles Description': 'Burgers, sandwiches & other American bites, plus desserts, in chill surrounds with a modern vibe.'}, 'Toast & Tonic': {'Image URL': 'https://images.slurrp.com/prodarticles/h8ias9n688c.webp', 'Toast & Tonic Description': 'Casual bar serving international gastropub cuisine and mixing classic cocktails.'}, 'Olive Beach': {'Image URL': 'https://lh3.googleusercontent.com/a8QC8iI3QqKwPyu9ubrVEs3CDTw_6FuSL-fnLALBhyl-lj03upT6K45-BLZnZQYRQbKzG4bdNCAwCigGZp4gJ862cIJN=w1200-rw', 'Olive Beach Description': 'Contemporary Mediterranean bistro with beachy, white-walled decor & stylish furnishings.'}}"
     }
   ]
 }
