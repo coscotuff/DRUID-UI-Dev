@@ -6,19 +6,25 @@ import os
 import json
 
 from rich.console import Console
-from prompts import PLANNING_PROMPT_V2, CODING_PROMPT_V2, CODING_PROMPT_TAILWIND, PLANNING_PROMPT_TAILWIND
+from prompts import (
+    PLANNING_PROMPT_V2,
+    CODING_PROMPT_V2,
+    CODING_PROMPT_TAILWIND,
+    PLANNING_PROMPT_TAILWIND,
+)
 
 load_dotenv()
 console = Console()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 tailwind = True
 
+
 def call_gpt(
     prompt=None,
     temperature=0,
     top_p=1,
     experimental=False,
-    max_tokens=1500,
+    max_tokens=2000,
     system_message_path: Optional[str] = None,
 ):
     if system_message_path:
@@ -56,12 +62,19 @@ def call_gpt(
 
 
 def get_breakdown(history):
-    prompt = PLANNING_PROMPT_TAILWIND.format(
-        clarifying_question=history[-1], chat_history=history[:-1]
-    )
+    if tailwind:
+        prompt = PLANNING_PROMPT_TAILWIND.format(
+            clarifying_question=history[-1], chat_history=history[:-1]
+        )
+    else:
+        prompt = PLANNING_PROMPT_V2.format(
+            clarifying_question=history[-1], chat_history=history[:-1]
+        )
+
     plan = call_gpt(prompt=prompt)
     with open("output/plan.md", "w") as file:
         file.write(plan)
+    console.log("[bold yellow]Plan generated and saved successfully!")
     return plan
 
 
@@ -83,37 +96,8 @@ def get_code(component_wise_breakdown, messages, key_details):
     code = call_gpt(prompt=prompt)
     with open("output/code.md", "w") as file:
         file.write(code)
+    console.log("[bold green]Code generated and saved successfully!")
     return code
-
-
-def code_postprocessing(response):
-    response = response.strip()
-    if "~~~" not in response:
-        return False
-
-    result = []
-    current_file = None
-    current_code = []
-    code_block = False
-
-    for line in response.splitlines():
-        if line.startswith("File: "):
-            if current_file:
-                result.append({"file": current_file, "code": "\n".join(current_code)})
-            current_file, current_code, code_block = (
-                (line.split("`")[1]).strip(),
-                [],
-                False,
-            )
-        elif line.startswith("```"):
-            code_block = not code_block
-        elif code_block:
-            current_code.append(line)
-
-    if current_file and current_code:
-        result.append({"file": current_file, "code": "\n".join(current_code)})
-
-    return result
 
 
 def breakdown_postprocessing(response):
@@ -138,8 +122,8 @@ def breakdown_postprocessing(response):
         elif line.startswith("Key Details:"):
             current_section = "key_details"
         elif current_section == "components":
-            if line.startswith("- [ ] Component"):
-                current_step = line.split("- [ ] ")[1].strip().split(":")[0]
+            if line.startswith("# [$] Component"):
+                current_step = line.split("# [$] ")[1].strip().split(":")[0]
                 try:
                     result["components"][current_step] = line.split(":")[1].strip()
                 except:
@@ -158,35 +142,7 @@ def breakdown_postprocessing(response):
     return result
 
 
-def parse_response(response):
-    """
-    The response would be a markdown of the following format:
-    ```markdown
-      ## **Requirement**
-      {describe here if a renderable is required. If not, skip the rest of the sections}
-
-      ## **HTML**
-      {html content here}
-
-      ## **CSS** (Optional in the case of Tailwind CSS)
-      {css content here}
-
-      ## **Javascript**
-      {js code here}
-    ```
-
-    Parse the response into a dictionary of the following format:
-    {
-        "requirement": str,
-        "html": str,
-        "css": str (optional),
-        "js": str
-    }
-    Also make an output directory and save the html, css, and js files there.
-
-    :param response:
-    :return: list[dict]
-    """
+def code_postprocessing(response):
     # Split the response into the different sections
     sections = response.split("##")
     sections = [section.strip() for section in sections]
@@ -194,9 +150,7 @@ def parse_response(response):
     # Parse the sections
     parsed_response = {}
     for section in sections:
-        if section.startswith("**Requirement**"):
-            parsed_response["requirement"] = section.split("**Requirement**")[1].strip()
-        elif section.startswith("**HTML**"):
+        if section.startswith("**HTML**"):
             parsed_response["html"] = section.split("**HTML**")[1].strip()
             # check if it starts with a code block and ends with a code block
             if parsed_response["html"].startswith("```html"):
@@ -233,53 +187,50 @@ def parse_response(response):
         # Save the files
         with open("output/index.html", "w") as file:
             file.write(parsed_response["html"])
-        console.log("HTML saved in output/index.html")
+        console.log("[green]HTML saved in output/index.html")
 
         if not tailwind:
             with open("output/style.css", "w") as file:
                 file.write(parsed_response["css"])
-            console.log("CSS saved in output/style.css")
+            console.log("[green]CSS saved in output/style.css")
 
         with open("output/script.js", "w") as file:
             file.write(parsed_response["js"])
-        console.log("Javascript saved in output/script.js")
-    except KeyError:
-        console.log("Something went wrong with the code generation...")
+        console.log("[green]Javascript saved in output/script.js")
+    except KeyError as e:
+        console.log("[bold red]Something went wrong while saving the generated code...: ", e)
 
     return parsed_response
 
 
 def run():
     # Read the messages
-    with open("chat.json", "r") as file:
+    with open("chat/chat.json", "r") as file:
         messages = json.load(file)
 
     # Create plans
-    console.log("[bold purple]Calling the GPT model...")
+    console.log("[bold purple]Step 1: Create a component-wise breakdown plan...")
     with console.status("[bold red]Generating plan..."):
         response = get_breakdown(messages["messages"])
         components = breakdown_postprocessing(response)
-    console.log("[bold yellow]Plan generated successfully!")
 
     if components["requirements"] == "False":
-        console.log("[bold red]No renderable required. Skipping code generation.")
+        console.log("[bold red]No renderable required. Skipping code generation...")
         return
 
     # Convert plan to code
-    console.log("[bold purple]Calling the GPT model...")
+    console.log("[bold purple]Step 2: Generate code using the previously generated breakdown plan...")
     with console.status("[bold green]Generating code..."):
         response = get_code(
             components["components"], messages["messages"], components["key_details"]
         )
-    console.log("[bold green]Code generated successfully!")
-
-    # Save the response
-    with open("output/response.md", "w") as file:
-        file.write(response)
-    console.log("Response saved successfully!")
 
     # Parse the response
-    parsed_response = parse_response(response)
+    code_postprocessing(response)
+
+    console.log(
+        "[bold purple]Code generation completed successfully and saved into respective files!"
+    )
 
 
 if __name__ == "__main__":

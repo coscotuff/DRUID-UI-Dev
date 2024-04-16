@@ -9,63 +9,82 @@
     <title>Restaurant Reservation Form</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-800 text-white">
-    <div class="container mx-auto p-4">
-        <h1 class="text-3xl font-bold text-center mb-6">Restaurant Reservation</h1>
+<body class="bg-gray-800 text-white p-5">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Make a Reservation</h1>
         <form id="reservationForm" class="space-y-4">
-            <!-- Component 1 (Restaurant Selection) -->
+            <!-- Component 1 (Restaurant Selection Cards) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Truffles -->
-                <label class="block border border-gray-700 bg-gray-900 hover:bg-gray-700 p-4 rounded shadow">
+                <!-- Truffles Card -->
+                <label class="block p-4 bg-gray-900 rounded shadow-lg">
                     <input type="radio" name="restaurant" value="Truffles" class="mr-2">
                     <img src="https://content.jdmagicbox.com/v2/comp/bangalore/a4/080pxx80.xx80.170403121558.u8a4/catalogue/truffles-kalyan-nagar-bangalore-restaurants-vtskn.jpg" alt="Truffles" class="w-full h-32 object-cover rounded">
-                    <p>Burgers, sandwiches & other American bites, plus desserts, in chill surrounds with a modern vibe.</p>
+                    <p class="mt-2">Burgers, sandwiches & other American bites, plus desserts, in chill surrounds with a modern vibe.</p>
                 </label>
-                <!-- Toast & Tonic -->
-                <label class="block border border-gray-700 bg-gray-900 hover:bg-gray-700 p-4 rounded shadow">
+                <!-- Toast & Tonic Card -->
+                <label class="block p-4 bg-gray-900 rounded shadow-lg">
                     <input type="radio" name="restaurant" value="Toast & Tonic" class="mr-2">
                     <img src="https://images.slurrp.com/prodarticles/h8ias9n688c.webp" alt="Toast & Tonic" class="w-full h-32 object-cover rounded">
-                    <p>Casual bar serving international gastropub cuisine and mixing classic cocktails.</p>
+                    <p class="mt-2">Casual bar serving international gastropub cuisine and mixing classic cocktails.</p>
                 </label>
-                <!-- Olive Beach -->
-                <label class="block border border-gray-700 bg-gray-900 hover:bg-gray-700 p-4 rounded shadow">
+                <!-- Olive Beach Card -->
+                <label class="block p-4 bg-gray-900 rounded shadow-lg">
                     <input type="radio" name="restaurant" value="Olive Beach" class="mr-2">
                     <img src="https://lh3.googleusercontent.com/a8QC8iI3QqKwPyu9ubrVEs3CDTw_6FuSL-fnLALBhyl-lj03upT6K45-BLZnZQYRQbKzG4bdNCAwCigGZp4gJ862cIJN=w1200-rw" alt="Olive Beach" class="w-full h-32 object-cover rounded">
-                    <p>Contemporary Mediterranean bistro with beachy, white-walled decor & stylish furnishings.</p>
+                    <p class="mt-2">Contemporary Mediterranean bistro with beachy, white-walled decor & stylish furnishings.</p>
                 </label>
             </div>
 
-            <!-- Component 2 (Reservation Date Picker) -->
+            <!-- Component 2 (Name Input) -->
             <div>
-                <label for="reservationDate" class="block mb-2">Reservation Date</label>
-                <input type="date" id="reservationDate" name="reservationDate" class="w-full bg-gray-700 border border-gray-600 p-2 rounded">
+                <label for="nameInput" class="block mb-2">Your Name</label>
+                <input type="text" id="nameInput" class="w-full p-2 bg-gray-900 rounded border border-gray-700" placeholder="Enter your name" required>
             </div>
 
-            <!-- Component 3 (Reservation Time Selector) -->
+            <!-- Component 3 (Email Input) -->
             <div>
-                <label for="reservationTime" class="block mb-2">Reservation Time</label>
-                <input type="time" id="reservationTime" name="reservationTime" class="w-full bg-gray-700 border border-gray-600 p-2 rounded">
+                <label for="emailInput" class="block mb-2">Your Email</label>
+                <input type="email" id="emailInput" class="w-full p-2 bg-gray-900 rounded border border-gray-700" placeholder="Enter your email" required>
             </div>
 
-            <!-- Component 4 (Number of Guests Selector) -->
+            <!-- Component 4 (Date Picker) -->
             <div>
-                <label for="numberOfGuests" class="block mb-2">Number of Guests</label>
-                <select id="numberOfGuests" name="numberOfGuests" class="w-full bg-gray-700 border border-gray-600 p-2 rounded">
-                    <!-- JavaScript will populate this dropdown -->
+                <label for="datePicker" class="block mb-2">Reservation Date</label>
+                <input type="date" id="datePicker" class="w-full p-2 bg-gray-900 rounded border border-gray-700" required>
+            </div>
+
+            <!-- Component 5 (Time Picker) -->
+            <div>
+                <label for="timePicker" class="block mb-2">Reservation Time</label>
+                <input type="time" id="timePicker" class="w-full p-2 bg-gray-900 rounded border border-gray-700" required>
+            </div>
+
+            <!-- Component 6 (Party Size Selector) -->
+            <div>
+                <label for="partySize" class="block mb-2">Party Size</label>
+                <select id="partySize" class="w-full p-2 bg-gray-900 rounded border border-gray-700">
+                    <option value="1">1 Person</option>
+                    <option value="2">2 People</option>
+                    <option value="3">3 People</option>
+                    <option value="4">4 People</option>
+                    <option value="5">5 People</option>
+                    <option value="6">6 People</option>
+                    <option value="7">7 People</option>
+                    <option value="8">8 People</option>
+                    <option value="9">9 People</option>
+                    <option value="10">10 People</option>
                 </select>
             </div>
 
-            <!-- Component 5 (Special Requests Textarea) -->
+            <!-- Component 7 (Special Requests Textarea) -->
             <div>
                 <label for="specialRequests" class="block mb-2">Special Requests</label>
-                <textarea id="specialRequests" name="specialRequests" rows="4" class="w-full bg-gray-700 border border-gray-600 p-2 rounded"></textarea>
+                <textarea id="specialRequests" class="w-full p-2 bg-gray-900 rounded border border-gray-700" rows="4" placeholder="Any special requests?"></textarea>
             </div>
 
-            <!-- Component 6 (Submit Button) -->
+            <!-- Component 8 (Submit Button) -->
             <div>
-                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300">
-                    Submit
-                </button>
+                <button type="submit" class="w-full p-3 bg-blue-500 rounded hover:bg-blue-600 transition duration-300">Submit</button>
             </div>
         </form>
     </div>
@@ -78,32 +97,67 @@
 ## **Javascript**
 ```javascript
 document.addEventListener('DOMContentLoaded', function() {
-    // Populate number of guests dropdown
-    const numberOfGuestsSelect = document.getElementById('numberOfGuests');
-    for (let i = 1; i <= 10; i++) {
-        const option = document.createElement('option');
-        option.value = i;
-        option.textContent = i;
-        numberOfGuestsSelect.appendChild(option);
-    }
-
-    // Form submission event listener
     const reservationForm = document.getElementById('reservationForm');
+    const datePicker = document.getElementById('datePicker');
+    const timePicker = document.getElementById('timePicker');
+
     reservationForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        const formData = new FormData(reservationForm);
-        const data = {
-            restaurant: formData.get('restaurant'),
-            reservationDate: formData.get('reservationDate'),
-            reservationTime: formData.get('reservationTime'),
-            numberOfGuests: formData.get('numberOfGuests'),
-            specialRequests: formData.get('specialRequests')
+        // Validate selected restaurant
+        const selectedRestaurant = document.querySelector('input[name="restaurant"]:checked');
+        if (!selectedRestaurant) {
+            alert('Please select a restaurant.');
+            return;
+        }
+
+        // Validate name input
+        const nameInput = document.getElementById('nameInput');
+        if (nameInput.value.trim() === '') {
+            alert('Please enter your name.');
+            return;
+        }
+
+        // Validate email input
+        const emailInput = document.getElementById('emailInput');
+        if (emailInput.value.trim() === '' || !emailInput.checkValidity()) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        // Validate date picker
+        const currentDate = new Date().toISOString().split('T')[0];
+        if (datePicker.value < currentDate) {
+            alert('Please select a valid reservation date.');
+            return;
+        }
+
+        // Validate time picker
+        // Assuming the restaurant operates from 10:00 to 22:00
+        const selectedTime = timePicker.value;
+        const openingTime = '10:00';
+        const closingTime = '22:00';
+        if (selectedTime < openingTime || selectedTime > closingTime) {
+            alert('Please select a valid reservation time within operating hours (10:00 - 22:00).');
+            return;
+        }
+
+        // Collect all data for submission
+        const reservationData = {
+            restaurant: selectedRestaurant.value,
+            name: nameInput.value,
+            email: emailInput.value,
+            date: datePicker.value,
+            time: timePicker.value,
+            partySize: document.getElementById('partySize').value,
+            specialRequests: document.getElementById('specialRequests').value
         };
 
+        console.log('Reservation Data:', reservationData);
         // Here you would typically send the data to the server
-        console.log('Form Data:', data);
-        alert('Reservation submitted!'); // Placeholder for actual submission logic
+        // For this example, we'll just log it to the console
+
+        alert('Reservation submitted successfully!');
     });
 });
 ```

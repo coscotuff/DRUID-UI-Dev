@@ -1,29 +1,64 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Populate number of guests dropdown
-    const numberOfGuestsSelect = document.getElementById('numberOfGuests');
-    for (let i = 1; i <= 10; i++) {
-        const option = document.createElement('option');
-        option.value = i;
-        option.textContent = i;
-        numberOfGuestsSelect.appendChild(option);
-    }
-
-    // Form submission event listener
     const reservationForm = document.getElementById('reservationForm');
+    const datePicker = document.getElementById('datePicker');
+    const timePicker = document.getElementById('timePicker');
+
     reservationForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        const formData = new FormData(reservationForm);
-        const data = {
-            restaurant: formData.get('restaurant'),
-            reservationDate: formData.get('reservationDate'),
-            reservationTime: formData.get('reservationTime'),
-            numberOfGuests: formData.get('numberOfGuests'),
-            specialRequests: formData.get('specialRequests')
+        // Validate selected restaurant
+        const selectedRestaurant = document.querySelector('input[name="restaurant"]:checked');
+        if (!selectedRestaurant) {
+            alert('Please select a restaurant.');
+            return;
+        }
+
+        // Validate name input
+        const nameInput = document.getElementById('nameInput');
+        if (nameInput.value.trim() === '') {
+            alert('Please enter your name.');
+            return;
+        }
+
+        // Validate email input
+        const emailInput = document.getElementById('emailInput');
+        if (emailInput.value.trim() === '' || !emailInput.checkValidity()) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        // Validate date picker
+        const currentDate = new Date().toISOString().split('T')[0];
+        if (datePicker.value < currentDate) {
+            alert('Please select a valid reservation date.');
+            return;
+        }
+
+        // Validate time picker
+        // Assuming the restaurant operates from 10:00 to 22:00
+        const selectedTime = timePicker.value;
+        const openingTime = '10:00';
+        const closingTime = '22:00';
+        if (selectedTime < openingTime || selectedTime > closingTime) {
+            alert('Please select a valid reservation time within operating hours (10:00 - 22:00).');
+            return;
+        }
+
+        // Collect all data for submission
+        const reservationData = {
+            restaurant: selectedRestaurant.value,
+            name: nameInput.value,
+            email: emailInput.value,
+            date: datePicker.value,
+            time: timePicker.value,
+            partySize: document.getElementById('partySize').value,
+            specialRequests: document.getElementById('specialRequests').value
         };
 
+        console.log('Reservation Data:', reservationData);
         // Here you would typically send the data to the server
-        console.log('Form Data:', data);
-        alert('Reservation submitted!'); // Placeholder for actual submission logic
+        // For this example, we'll just log it to the console
+
+        alert('Reservation submitted successfully!');
     });
 });
